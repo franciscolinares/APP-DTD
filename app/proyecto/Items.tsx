@@ -1,7 +1,7 @@
 import React  from 'react';
 
-export default function item(tarea){ 
+export default function item(props){ 
   return(    
-        <li  key={tarea.item.id}><input type="checkbox"/>{tarea.item.name}</li>            
+        <li  key={props.item.id}><input type="checkbox"/>{props.item.name}</li>            
     );
 }

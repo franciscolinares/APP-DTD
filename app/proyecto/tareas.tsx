@@ -1,10 +1,12 @@
 import React, { useState }  from 'react';
 import Items from './Items';
 
-export default function Listado(tareas){ 
-  return(
+export default function Listado(props){ 
+  var contador = props.Listado.length
+  return(        
      <ul style={{color:'red'}}>
-          {tareas.Listado.map(tarea => (          
+          <h1 >Total tareas agregadas:{contador} </h1>   
+          {props.Listado.map(tarea => (          
           <Items item={tarea}/>
         ))}
       </ul>    

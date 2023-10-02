@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import Tareas  from './tareas';
 
 let nextId=0;
-var contador= 0;
 
 export default function List() {
   const [name, setName] = useState('');
@@ -11,7 +10,7 @@ export default function List() {
 
   return(
     <>     
-      <h1 style={{color:'black', fontSize:'32px', border:'none', borderRadius:'4px'}}>Tareas</h1>
+      <h1 style={{color:'black', fontSize:'32px', border:'none', borderRadius:'4px', align:'center'}}>Tareas</h1>
       <input        
         value={name}
         onChange={e => setName(e.target.value)}
@@ -26,12 +25,10 @@ export default function List() {
               ...tareas,
               { id: nextId++, name: name }
             ]
-          );
-          contador++
+          );          
           setName('');
         
-      }}>Agregar tarea</button>        
-        <h1>Total tareas agregadas:{contador} </h1>   
+      }}>Agregar tarea</button>               
         <form>
           <label  className="row">
             <div className="col-md-3" style={{border: '1px solid black'}}>
