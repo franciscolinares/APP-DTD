@@ -1,16 +1,25 @@
 import React, { useState }  from 'react';
 import Items from './Items';
 
-export default function Listado(props){ 
-  var contador = props.Listado.length
+const  Listado = (props) =>{ 
+  const [cont,setCont] = useState(0);
+  var contador = props.Listado.length     
+  
+  const conteo = (cont) =>{
+    setCont(cont);
+  }
+
   return(        
      <ul style={{color:'red'}}>
-         <h1 >Total tareas agregadas:{contador} </h1>          
+         <h1 >Total tareas agregadas:{contador} </h1>                  
+         <h1 >Tareas pendientes:{cont} </h1> 
           {props.Listado.map(tarea => (          
-          <Items item={tarea}/>          
+          <Items item={tarea} conteo={conteo}/>          
         ))}        
-        <h1 >Total tareas seleccionadas: </h1>
+                          
       </ul>    
       
     );
 }
+
+export default Listado;
