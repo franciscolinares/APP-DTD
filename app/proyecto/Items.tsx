@@ -1,20 +1,23 @@
 import React from 'react';
 
-var cont = 0;
-const Item=( {item , conteo} )=>{   
-  const handleChange = () => {                  
+//var cont = 0; // vamos a evitar el uso de var, para este framework "no esta permitido"
+//cont = 0 es usado de manera global al ser declarada como var | el problema de var es que no va sincronizada con el render
+// en pocas palabras trabajan en deferentes tiempos por lo cual lleva al problema del desface de visualizacion
+export default function item(props){   
+  const handleChange = (event) => {                   
         if (event.target.checked) {
-          conteo(cont++)
-          console.log('true',cont);
+          //cont++         
+        //  console.log('true ',cont);// solo es usado para imprimirse en la consola
+          props.aumentar()//llamado al metodo definido en el padre y que llego aqui como prop
         } else {
-          conteo(cont--)
-          console.log('false',cont);
-        }
+          props.restar()         //llamado al metodo definido en el padre y que llego mediante el prop 
+          //console.log('false ',cont);// solo es usado para imprimirse en la consola
+        }        
   }; 
-  return(        
-        <li  key={item.id}><input type="checkbox"  onChange={handleChange}/>
-        {item.name}</li>            
+  return(//(*err1) aqui no se usa el valor cont, solo en el handleChange de arriba pero no tiene caso 
+        <li key={props.item.id}>
+          <input type="checkbox" onChange={handleChange}/> {props.item.name}
+        </li>                    
+      
     );
 }
-
-export default Item;

@@ -10,7 +10,7 @@ export default function List() {
 
   return(
     <>     
-      <h1 style={{color:'black', fontSize:'32px', border:'none', borderRadius:'4px', align:'center'}}>Tareas</h1>
+      <h1 style={{color:'black', fontSize:'32px', border:'none', borderRadius:'4px'}}>Tareas</h1>
       <input        
         value={name}
         onChange={e => setName(e.target.value)}
@@ -32,7 +32,7 @@ export default function List() {
         <form>
           <label  className="row">
             <div className="col-md-3" style={{border: '1px solid black'}}>
-              <Tareas Listado={tareas}/>        
+              <Tareas tareas={tareas}/>        
             </div>
           </label>
         </form>     
