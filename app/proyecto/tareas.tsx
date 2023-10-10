@@ -12,6 +12,7 @@ export default function tareas(props){//listado contiene Items
    const restaContador = () => { // creamos otra funcion mas para decrementar
     setContadorTerminadas(prev => prev - 1);
   }
+  
 
   return(        
      /* asi estaba, pero esta mal

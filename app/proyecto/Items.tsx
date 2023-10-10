@@ -16,7 +16,9 @@ export default function item(props){
   }; 
   return(//(*err1) aqui no se usa el valor cont, solo en el handleChange de arriba pero no tiene caso 
         <li key={props.item.id}>
-          <input type="checkbox" onChange={handleChange}/> {props.item.name}
+          <input type="checkbox" onChange={handleChange}/> {props.item.name} 
+          <button style={{color:'black', fontSize:'20px', border:'none', borderRadius:'4px', background:'white'}}>Editar</button>
+           <button style={{color:'black', fontSize:'20px', border:'none', borderRadius:'4px', background:'white'}}>Eliminar</button>
         </li>                    
       
     );
