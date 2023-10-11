@@ -1,11 +1,8 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
- 
-export default async  function POST(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  //const data = req.body
-  console.log('req: ',req)
-  //res.status(200).json()  
-  console.log('res: ',res)
+import { NextResponse } from "next/server"
+
+export function POST() {
+  
+  const data = {hola: "Mundo"}//await res.json()
+  console.log(data)
+  return NextResponse.json({ data })
 }

@@ -1,6 +1,7 @@
 'use client'
 import React, { useState, FormEvent } from 'react';
 import Tareas  from './tareas';
+import { isReadonlyKeywordOrPlusOrMinusToken } from 'typescript';
 
 let nextId=0;
 
@@ -11,13 +12,35 @@ export default function List() {
    async function onSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
-    console.log('formData: ',formData)
+    //console.log('formData: ',formData)
     const response = await fetch('/api/agregar', {
-      method: 'POST',
+      method: 'POST',     
      // body: formData,
     });
-    console.log('response: ',response)
+    const respuesta = await response.json()
+
+    console.log('response: ',respuesta)
   }
+
+  const edicionpadre = id => {       
+   console.log('EP',id)
+   const  newTareas = tareas.map((tareas)=>{
+    if (tareas.id === id){
+      return{
+        ...tareas,
+        name: 'a',
+      }
+    }
+    return tareas
+   })
+   setTarea(newTareas);
+  };  
+
+  const eliminarpadre = i => {  
+    const  newTareas = tareas.filter((tareas) => tareas.id !== i);  
+    setTarea(newTareas);
+   }
+  
   return(
     <>     
     <form onSubmit={onSubmit}>
@@ -43,7 +66,7 @@ export default function List() {
       </form>        
           <label  className="row">
             <div className="col-md-3" style={{border: '1px solid black'}}>
-              <Tareas tareas={tareas}/>        
+              <Tareas tareas={tareas}  eliminarpadre={eliminarpadre} edicionpadre={edicionpadre}/>        
             </div>
           </label>  
     </>
