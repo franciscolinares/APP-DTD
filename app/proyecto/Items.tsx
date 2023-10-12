@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 //var cont = 0; // vamos a evitar el uso de var, para este framework "no esta permitido"
 //cont = 0 es usado de manera global al ser declarada como var | el problema de var es que no va sincronizada con el render
 // en pocas palabras trabajan en deferentes tiempos por lo cual lleva al problema del desface de visualizacion
-export default function item(props){   
+export default function item(props){
+  
+  const [editando,setEditando] = useState(false)  
+  const [nombre, setNombre ] = useState('')
   const handleChange = (event) => {                   
         if (event.target.checked) {
           //cont++         
@@ -15,8 +18,10 @@ export default function item(props){
         }        
   }; 
 
-  const Editar= () =>{
-    props.edicion(props.item.id)
+
+  const Editar= () =>{         
+      props.edicion(props.item.id,nombre)
+      setEditando(!editando)    
   }
 
   const Delete= () =>{
@@ -24,8 +29,9 @@ export default function item(props){
   }
   return(//(*err1) aqui no se usa el valor cont, solo en el handleChange de arriba pero no tiene caso 
         <li key={props.item.id}>
-          <input type="checkbox" disabled="" onChange={handleChange}/> {props.item.name} 
-          <button style={{color:'black', fontSize:'20px', border:'none', borderRadius:'4px', background:'white'}} onClick={() => Editar(props.item.id)}>Editar</button>
+          <input type="checkbox" onChange={handleChange}/>           
+          { editando ? <input type='text' name={nombre} onChange={e => setNombre(e.target.value)} ></input> : props.item.name} 
+          <button style={{color:'black', fontSize:'20px', border:'none', borderRadius:'4px', background:'white'}} onClick={(onChange) => Editar(props.item.id)}>{editando ? 'guardar' :'editar'}</button>
            <button style={{color:'black', fontSize:'20px', border:'none', borderRadius:'4px', background:'white'}} onClick={() => Delete(props.item.id)}>Eliminar</button>
         </li>                    
       

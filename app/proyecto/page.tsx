@@ -1,7 +1,6 @@
 'use client'
 import React, { useState, FormEvent } from 'react';
 import Tareas  from './tareas';
-import { isReadonlyKeywordOrPlusOrMinusToken } from 'typescript';
 
 let nextId=0;
 
@@ -22,13 +21,13 @@ export default function List() {
     console.log('response: ',respuesta)
   }
 
-  const edicionpadre = id => {       
-   console.log('EP',id)
+  const edicionpadre = (id,nombre) => {       
+   console.log('EP',id,nombre)     
    const  newTareas = tareas.map((tareas)=>{
     if (tareas.id === id){
       return{
         ...tareas,
-        name: 'a',
+        name: nombre,
       }
     }
     return tareas

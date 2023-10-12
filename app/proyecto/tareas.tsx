@@ -19,8 +19,8 @@ export default function tareas(props){//listado contiene Items
     props.eliminarpadre(id)   
    }
 
-  const edicion = i => {       
-    props.edicionpadre(i)              
+  const edicion = (i,nombre) => {        
+    props.edicionpadre(i,nombre)              
   };  
 
   return(        
