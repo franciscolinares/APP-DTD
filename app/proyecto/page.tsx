@@ -1,26 +1,29 @@
 'use client'
 import React, { useState, FormEvent } from 'react';
 import Tareas  from './tareas';
+import { useForm } from 'react-hook-form';
+import { data } from 'autoprefixer';
+
 
 let nextId=0;
 
 export default function List() {
-  const [name, setName] = useState('');
+  const [name, setName] = useState(''); //variable de estado de react
   const [tareas, setTarea] = useState([]); 
 
-   async function onSubmit(event) {
-    event.preventDefault();
-    const formData = new FormData(event.currentTarget);
+   async function onSubmit(data) {
+    //event.preventDefault();
+  //  const formData = new FormData(event.currentTarget);
     //console.log('formData: ',formData)
     const response = await fetch('/api/agregar', {
-      method: 'POST',     
-     // body: formData,
+      method: 'POST',           
+      body: JSON.stringify({data})
     });
     const respuesta = await response.json()
 
     console.log('response: ',respuesta)
   }
-
+  
   const edicionpadre = (id,nombre) => {       
    console.log('EP',id,nombre)     
    const  newTareas = tareas.map((tareas)=>{
@@ -39,13 +42,20 @@ export default function List() {
     const  newTareas = tareas.filter((tareas) => tareas.id !== i);  
     setTarea(newTareas);
    }
-  
+
+   const {register , handleSubmit} =  useForm({
+    defaultValues: {
+      nombre: '',
+    }})
+    
+    
   return(
-    <>     
-    <form onSubmit={onSubmit}>
+    <>        
+    <form onSubmit={handleSubmit(onSubmit)}>
       <h1 style={{color:'black', fontSize:'32px', border:'none', borderRadius:'4px'}}>Tareas</h1>
       <input        
-        value={name}
+        //value={name}
+        {...register('nombre')}
         onChange={e => setName(e.target.value)}
       />
       <button  style={{color:'black', fontSize:'20px', border:'none', borderRadius:'4px', background:'green'}} onClick={() => {
