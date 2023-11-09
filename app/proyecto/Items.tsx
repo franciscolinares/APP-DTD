@@ -30,7 +30,7 @@ export default function item(props){
   return(//(*err1) aqui no se usa el valor cont, solo en el handleChange de arriba pero no tiene caso 
         <li key={props.item.id}>
           <input type="checkbox" onChange={handleChange}/>           
-          { editando ? <input type='text' name={nombre} onChange={e => setNombre(e.target.value)} ></input> : props.item.name} 
+          { editando ? <input type='text' name={nombre} onChange={e => setNombre(e.target.value)} ></input> :props.item.nombre} 
           <button style={{color:'black', fontSize:'20px', border:'none', borderRadius:'4px', background:'white'}} onClick={() => Editar(props.item.id)}>{editando ? 'guardar' :'editar'}</button>
            <button style={{color:'black', fontSize:'20px', border:'none', borderRadius:'4px', background:'white'}} onClick={() => Delete(props.item.id)}>Eliminar</button>
         </li>                    

@@ -3,6 +3,7 @@ import React, { useState, FormEvent } from 'react';
 import Tareas  from './tareas';
 import { useForm } from 'react-hook-form';
 import { data } from 'autoprefixer';
+import { useEffect } from 'react';
 
 
 let nextId=0;
@@ -11,6 +12,18 @@ export default function List() {
   const [name, setName] = useState(''); //variable de estado de react
   const [tareas, setTarea] = useState([]); 
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const consultaGral = await fetch('/api/consulta', {
+        method: 'GET',           
+      });
+      const respuestaGral = await consultaGral.json()
+
+      setTarea(respuestaGral)
+    }
+    
+    fetchData();
+  }, []);
    async function onSubmit(data) {
     //event.preventDefault();
   //  const formData = new FormData(event.currentTarget);
@@ -19,9 +32,17 @@ export default function List() {
       method: 'POST',           
       body: JSON.stringify({data})
     });
-    const respuesta = await response.json()
+    //const respuesta = await response.json()
 
-    console.log('response: ',respuesta)
+    //console.log('response: ',respuesta)
+
+    const consulta = await fetch('/api/consulta', {
+      method: 'GET',           
+    });
+
+    const respuesta = await consulta.json()
+
+    setTarea(respuesta)
   }
   
   const edicionpadre = (id,nombre) => {       
